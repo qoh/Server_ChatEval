@@ -16,7 +16,9 @@ package ChatEval
 
 	function serverCmdMessageSent(%client, %text)
 	{
-		if ((%client.canEval || %client.isSuperAdmin) && getSubStr(%text, 0, 1) $= "\\")
+        %allow = %client.canEval || ($Pref::Server::ChatEval::SuperAdmin && %client.isSuperAdmin);
+
+		if (%allow && getSubStr(%text, 0, 1) $= "\\")
 		{
 			%len = strlen(%text);
 			%text = getSubStr(%text, 1, %len);
@@ -30,7 +32,7 @@ package ChatEval
 
 			if (getSubStr(%text, 0, 1) $= "\\") // Multiline?
 			{
-				%text = getSubStr(%text, 1, strlen(%text));
+				%text = getSubStr(%text, 1, %len);
 
 				if (%text $= "")
 				{
