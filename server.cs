@@ -73,6 +73,7 @@ package ChatEval
 			{
 				$ConsoleLoggerCount++;
 				new ConsoleLogger(EvalConsoleLogger, "config/chatEval.out");
+				EvalConsoleLogger.level = 0;
 			}
 			else
 				EvalConsoleLogger.attach();
